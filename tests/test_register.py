@@ -36,7 +36,7 @@ class TestRegister:
         register_api.assert_status_code_is(403)
         register_api.assert_response_message("User already exists")
 
-    @allure.title("Регистрация без почти")
+    @allure.title("Регистрация без почты")
     def test_register_without_email(self, register_api, get_user):
         get_user.email = ""
         register_api.register(get_user)
