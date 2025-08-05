@@ -2,6 +2,7 @@ import allure
 
 
 class TestRegister:
+    REQUIRED_FIELD_MSG = "Email, password and name are required fields"
 
     @allure.title("Регистрация пользователя")
     def test_register_user(self, register_api, get_user):
@@ -40,18 +41,18 @@ class TestRegister:
         get_user.email = ""
         register_api.register(get_user)
         register_api.assert_status_code_is(403)
-        register_api.assert_response_message("Email, password and name are required fields")
+        register_api.assert_response_message(self.REQUIRED_FIELD_MSG)
 
     @allure.title("Регистрация без пароля")
     def test_register_without_password(self, register_api, get_user):
         get_user.password = ""
         register_api.register(get_user)
         register_api.assert_status_code_is(403)
-        register_api.assert_response_message("Email, password and name are required fields")
+        register_api.assert_response_message(self.REQUIRED_FIELD_MSG)
 
     @allure.title("Регистрация без имени")
     def test_register_without_name(self, register_api, get_user):
         get_user.name = ""
         register_api.register(get_user)
         register_api.assert_status_code_is(403)
-        register_api.assert_response_message("Email, password and name are required fields")
+        register_api.assert_response_message(self.REQUIRED_FIELD_MSG)
